@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap'),
+    format('ttf');
+}
+
+.corner:before,
+.corner:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: solid red;
+  border-width: 0px 1px 1px 0px;
+  display: none;
+}
+
+.corner:before {
+  right: -12px;
+  bottom: -12px;
+}
+
+.corner:after {
+  border-width: 1px 0px 0px 1px;
+  left: -12px;
+  top: -12px;
+}
+
+.corner:after,
+.corner:before {
+  display: block;
+}
