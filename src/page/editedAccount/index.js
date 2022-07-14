@@ -14,6 +14,8 @@ import { storage } from "../../firebase/firebase";
 const EditedAccount = () => {
   const currentUserState = useSelector((state) => state.Auth);
 
+  const user1 = currentUserState.currentUser
+  console.log(user1)
   // const [image, setImage] = useState("");
 
   const [progress, setProgress] = useState(0);
@@ -103,49 +105,81 @@ const EditedAccount = () => {
           <h1 className="text-center text-white mt-3 font-bold text-2xl">
             Account Update
           </h1>
-          <form onSubmit={formHandler}>
-            <input
-              // allows you to reach into your file directory and upload image to the browser
-              className="bg-white"
-              type="file"
-            />
-            <button className="bg-green-jade w-20" type="submit">
-              Upload images
-            </button>
-          </form>
           <form onSubmit={submitUser}>
-            <div className="mb-4">
-              <label className="block text-md font-light mb-2" for="new_name">
-                Name
+            <div className="mt-5 mb-4">
+              
+              <img className="w-32 h-32 rounded-full mx-auto" src={user1.avatar} />
+              <label className="block text-md text-white font-medium mb-2" for="username">
+                Avatar
               </label>
               <input
-                className="w-full bg-drabya-gray border-gray appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outlineshadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                value={user1.avatar}
                 type="text"
-                name="new_name"
-                value={user.new_name}
+              />
+              
+            </div>
+          
+            <div className=" mb-4">
+              <label className="block text-md text-white font-medium mb-2" for="username">
+                Username
+              </label>
+              <input
+                className="shadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outlineshadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                name="username"
+                value={user1.username}
+                // onChange={handleChange}
+                placeholder="Username"
+                disabled
+              />
+            </div>
+            <div className="mt-3 mb-4">
+              <label className="block text-md text-white font-medium mb-2" for="email">
+                Email
+              </label>
+              <input
+                className="shadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outlineshadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                name="email"
+                value={user1.email}
                 onChange={handleChange}
-                placeholder="name"
+                placeholder="Email"
+              />
+            </div>
+            <div className="mt-3 mb-4">
+              <label className="block text-md text-white font-medium mb-2" for="role">
+                Role
+              </label>
+              <input
+                className="shadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outlineshadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                name="role"
+                value={user1.role}
+                onChange={handleChange}
+                placeholder="Role"
+                disabled
               />
             </div>
             <div className="mb-4">
-              <label className="block text-md font-light mb-2" for="new_goals">
+              <label className="block text-md text-white font-medium mb-2" for="new_goals">
                 Goals
               </label>
               <input
-                className="w-full bg-drabya-gray border-gray appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outlineshadow appearance-none border bg-white text-black rounded w-full py-2 px-3  mt-1 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 name="new_goals"
                 onChange={handleChange}
-                value={user.new_goals}
-                placeholder="goals"
+                value={user1.goals}
+                placeholder="Goals"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 text-blue-500">
               <h2>Uploading done {progress}%</h2>
             </div>
-            <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center justify-center mb-5">
               <button
-                className="bg-blue hover:bg-blue-dark text-white font-light py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+                className="bg-red-400 rounded-lg text-white font-bold text-lg hover:bg-red-500 p-2 mt-8 cursor-pointer"
                 type="submit"
               >
                 Submit

@@ -2,8 +2,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import { gql, useMutation } from "@apollo/client";
+// import { gql, useMutation } from "@apollo/client";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import useForm from "./utils/useForm";
+import axios from "axios";
 
 
 const style = {
@@ -19,6 +22,7 @@ const style = {
   px: 4,
   pb: 3,
 };
+
 
 // function ChildModal({ but_style, post }) {
 //   const [open, setOpen] = React.useState(false);
@@ -71,27 +75,56 @@ const style = {
 //     </React.Fragment>
 //   );
 // }
-const offlineCreate = gql`
-mutation MyMutation($class_id: Int = 10, $date: String = "", $days: String = "", $location: String = "", $name_class: String = "", $time: String = "", $user_id: Int = 10) {
-  insert_booking_offline_classes_one(object: {class_id: $class_id, date: $date, days: $days, location: $location, name_class: $name_class, time: $time, user_id: $user_id}) {
-    class_id
-    date
-    days
-    id
-    location
-    name_class
-    time
-    user_id
-  }
-}
-`;
+// const offlineCreate = gql`
+// mutation MyMutation($class_id: Int = 10, $date: String = "", $days: String = "", $location: String = "", $name_class: String = "", $time: String = "", $user_id: Int = 10) {
+//   insert_booking_offline_classes_one(object: {class_id: $class_id, date: $date, days: $days, location: $location, name_class: $name_class, time: $time, user_id: $user_id}) {
+//     class_id
+//     date
+//     days
+//     id
+//     location
+//     name_class
+//     time
+//     user_id
+//   }
+// }
+// `;
 export default function NestedModal({ but_style, post }) {
   const currentUserState = useSelector((state) => state.Auth);
   const user=currentUserState.currentUser
   
 
+  const [classId, setClassId] = useState('');
+  const [userId, setUserId] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
+  const [session, setSession] = useState('');
+  const [bookingClass, setBookingClass] = useForm({
+    'class_id': '',
+    'user_id': '',
+    'phone': '',
+    'email': '',
+    'date': '',
+    'session': '',
+  } )
+  const handleSubmit = (e) => {
+    console.log(user, 'ini user')
+    console.log(bookingClass, 'ini value booking class')
+    e.preventDefault()
+    // const fd = new FormData()
+    // fd.append('class_id', user)
+    // fd.append('user_id', idClass)
+    // fd.append('phone', phone)
+    // fd.append('email', email)
+    axios.post('localhost:8005', {
+
+    })
+  }
+
+
   const [open, setOpen] = React.useState(false);
-  const [mutate, { data: dataMutation }] = useMutation(offlineCreate);
+  // const [mutate, { data: dataMutation }] = useMutation(offlineCreate);
   const handleOpen = () => {
     setOpen(true);
     console.log(post);
@@ -100,19 +133,19 @@ export default function NestedModal({ but_style, post }) {
     setOpen(false);
   };
   const handleClick = () => {
-    console.log(post)
-    mutate({
-      variables:{
-        user_id:user.id,
-        name_class:post.name,
-        time:post.time,
-        location:post.location,
-        days:post.day,
-        date:post.date,
-        class_id:post.id
-      }
-    })
-    alert("done")
+    // console.log(post)
+    // mutate({
+    //   variables:{
+    //     user_id:user.id,
+    //     name_class:post.name,
+    //     time:post.time,
+    //     location:post.location,
+    //     days:post.day,
+    //     date:post.date,
+    //     class_id:post.id
+    //   }
+    // })
+    // alert("done")
   };
 
 
@@ -147,7 +180,20 @@ export default function NestedModal({ but_style, post }) {
             Hi, here are the results of the class to be booked with the following details and please choose your schedule
           </p>
           <p className="text-base font-medium">Class Name</p>
-          <p  className="text-sm font-normal">{post.name}</p>
+          <p className="text-sm font-normal">{post.name}</p>
+          <form action="" onSubmit={handleSubmit}>
+            <input type="hidden" defaultValue={post.id} onSubmit={e => { setBookingClass('class_id', e.target.value) }} name="class_id" />
+            <input type="hidden" defaultValue={user.id} onSubmit={e => { setBookingClass('user_id', e.target.value) }} name="user_id" />
+          <div className="font-semibold grid grid-cols-3 mb-4 gap-2">
+              <label htmlFor="email">Session</label>
+              <input className="col-span-2 border border-gray-300 rounded-md pl-3 p-1" type="text" placeholder="Session" name="session" onChange={e => { setBookingClass('session', e.target.value) }} />
+              <label htmlFor="email">Date</label>
+              <input className="col-span-2 border border-gray-300 rounded-md pl-3 p-1" type="text" placeholder="Date" name="date" onChange={e => { setBookingClass('date', e.target.value) }} />
+              <label htmlFor="email">Email</label>
+              <input className="col-span-2 border border-gray-300 rounded-md pl-3 p-1" type="text" placeholder="Email" name="email" onChange={e => { setBookingClass('email', e.target.value) }} />
+              <label htmlFor="phone">Phone</label>
+              <input className="col-span-2 border border-gray-300 rounded-md pl-3 p-1" type="text" placeholder="Phone" name="phone" onChange={e => { setBookingClass('phone', e.target.value) }} />
+            </div>
           {/* <Box sx={{ minWidth: 120 }}>
             <DatePicker/>
           </Box> */}
@@ -158,7 +204,8 @@ export default function NestedModal({ but_style, post }) {
         className={but_style}
       >
         BOOKING
-      </Button>
+            </Button>
+          </form>
         </Box>
       </Modal>
     </div>

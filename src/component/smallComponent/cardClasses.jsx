@@ -39,24 +39,27 @@ const cardClasses = ({ posts, loading, state }) => {
             <p className="text-sm text-gray-400 ">
               {post.short_desc}
             </p>
-            <div>
-              <span className="description text-sm text-black font-semibold block py-2 ">
-                Capacity :
+            <div className="grid grid-cols-3 m-4 gap-3">
+              <span className="description text-sm text-black font-semibold block">
+                Capacity
               </span>
-              <span className="description text-sm text-gray-dark font-medium block">
-                {post.capacity}
+              <span className="col-span-2 description text-sm text-gray-dark font-medium block">
+                : {post.capacity}
               </span>
-              <span className="description text-sm text-black font-semibold block py-2 ">
-                Monthly Fee :
+              <span className="description text-sm text-black font-semibold block">
+                Monthly Fee
               </span>
-              <span className="description text-sm text-gray-dark font-medium block">
-                Rp. {post.monthly_fee}
+              <span className="col-span-2 description text-sm text-gray-dark font-medium block">
+                : Rp. {post.monthly_fee}
               </span>
+              
+              <div className="col-span-3">   
               <CardActions>
                 <div className="mx-auto">
                   {state === "offline" ? <Modal but_style={but_style} post={post} /> : <ModalOnline but_style={but_style} post={post} />}
                 </div>
               </CardActions>
+                </div>
             </div>
           </div>
         </div>

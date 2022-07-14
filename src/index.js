@@ -9,8 +9,8 @@ import { Provider } from "react-redux"
 import store from './store'
 import setAuthorizationToken  from './authorization/authorization'
 import { LOGIN_SUCCESS } from './store/modules/auth/authTypes';
-import { ApolloProvider } from "@apollo/client";
-import Client from "./apolloClient";
+// import { ApolloProvider } from "@apollo/client";
+// import Client from "./apolloClient";
 
 
 if (localStorage.token){
@@ -20,7 +20,6 @@ if (localStorage.token){
 }
 
 ReactDOM.render(
-  <ApolloProvider client={Client}>
   <Provider store={store}>
   <StyledEngineProvider injectFirst>
     <BrowserRouter>
@@ -29,8 +28,7 @@ ReactDOM.render(
       {/* </React.StrictMode> */}
     </BrowserRouter>
   </StyledEngineProvider>
-  </Provider>
-  </ApolloProvider>,
+  </Provider>,
   document.getElementById("root")
 );
 
