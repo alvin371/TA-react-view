@@ -47,9 +47,11 @@ const membership = () => {
               <li>2. Make a className appointment</li>
               <li>3. And anything else</li>
             </ol>
-            <button className="mt-5 bg-red py-3 px-6 shadow-2xl rounded-xl bg-red-500 text-white font-bold">
-              Get Membership
-            </button>
+            <div className="mt-5">
+              <a href="/sign-up" className="mt-5 bg-red py-3 px-6 shadow-2xl rounded-xl bg-red-500 text-white font-bold">
+                Get Membership
+              </a>
+            </div>
 
           </div>
 

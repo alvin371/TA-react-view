@@ -15,7 +15,8 @@ const Account = () => {
   const currentUserState = useSelector((state) => state.Auth);
   const user=currentUserState.currentUser
   console.log(currentUserState)
-  console.log(user)
+  console.log( user,"ini user avatar" )
+  
   // const [image, setImage] = useState("");
   // const [editState, setEditState] = useState(false);
   // const [progress, setProgress] = useState(0);
@@ -110,7 +111,7 @@ const Account = () => {
         <div className="mt-4">
           <Link
             to="/user/edited"
-            className="border rounded-full py-2 px-4 text-xs font-semibold text-white bg-red hover:bg-red-dark"
+            className="border bg-red-400 hover:bg-red-600 rounded-full py-2 px-4 text-xs font-semibold text-white bg-red hover:bg-red-dark"
           >
             Edit Profile
           </Link>
